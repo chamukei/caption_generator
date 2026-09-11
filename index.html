@@ -783,8 +783,8 @@ Format output strictly as JSON with keys "textOnly", "emojiOnly", and "combined"
 
           if (imageBase64) {
             try {
-              // API Model endpoint using gemini-3.8-flash for active multimodal support
-              const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
+              // Standard Gemini 3 Flash model for Vision & Image Understanding
+              const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
               const payload = {
                 contents: [
@@ -844,7 +844,7 @@ Format output strictly as JSON with keys "textOnly", "emojiOnly", and "combined"
 
           // UI notification & fallback handling
           if (isRateLimited && !generatedResult) {
-            showToast('⚠️ API 請求頻率過高 (429 Rate Limit)，請稍後再試或檢查 Key 額度。');
+            showToast('⚠️ API 額度限制 (429 Rate Limit)：請等候約 1 分鐘後再試，或至 AI Studio 檢查 Key 額度。');
           } else if (isServerBusy && !generatedResult) {
             showToast('AI 伺服器目前繁忙，請稍後再試。');
           } else if (!generatedResult) {
